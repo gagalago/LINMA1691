@@ -27,14 +27,14 @@
 
 \begin{mytheo} [Caractérisations des arbres]
   Soit $G$ un graphe à $n$ sommets et $m$ arêtes. Alors les conditions suivantes sont équivalentes :
-  \begin{itemize}
+  \begin{enumerate}
     \item $G$ est connexe et sans cycle;
     \item $G$ est sans cycle et $m = n − 1$;
     \item $G$ est connexe et $m = n − 1$;
     \item $G$ est connexe et supprimer une arête quelconque déconnecte $G$;
     \item $G$ est sans cycle et ajouter une arête quelconque crée un et un seul cycle;
     \item Deux noeuds de $G$ sont toujours reliés par un seul chemin.
-  \end{itemize}
+  \end{enumerate}
   La dernière condition implique que G est sans boucle (pour deux noeuds identiques).
   \begin{proof}
   Nous allons démontrer que chaque condition implique la suivante et qu'elles sont ainsi toutes équivalentes.
@@ -198,6 +198,7 @@
   \end{align*}
 \end{myexem}
 
+\newpage
 \subsection{Algorithme de Kruskal}
 \index{algorithme!algorithme de Kruskal}
 \begin{myalgo}[Algorithme de Kruskal]
@@ -217,6 +218,13 @@
     \end{algorithmic}
   \end{algorithm}
 \end{myalgo}
+
+\begin{myexem}[Exécution de l'algorithme de Kruskal]
+  On cherche l’arbre sous-tendant de poids minimum de :
+  \begin{center}
+    \includegraphics[width=400pt]{../img/kruskal}
+  \end{center}
+\end{myexem}
 
 \begin{mytheo}
   L'algorithme de Kruskal est correct.
@@ -304,14 +312,34 @@
     Est une façon de déconnecter un graphe est de retirer les arêtes incidentes au noeud de degré minimum
     
     $$\text{connectivité} \leq \text{arête-connectivité}$$
-    Par récurrence (le cas arête-connectivité = 0 est trivial). On prend une coupe de k arêtes (avec e qui est une arête quelconque de cette coupe). G-e a, par conséquent, une arête-connexité k-1. Imaginons que G-e a tous les noeuds adjacents (graphe complet avec, éventuellement, répétition d'arêtes). Alors : $\text{connectivité(G)}=\text{connectivité(G-e)} \leq k-1$.
+    Par récurrence (le cas arête-connectivité = 0 est trivial). On prend une coupe de k arêtes (avec e qui est une arête quelconque de cette coupe). G-e a, par conséquent, une arête-connexité k-1. 
+    \begin{itemize}
+      \item Cas extrême : G-e a tous les noeuds adjacents (graphe complet avec, éventuellement, répétition d'arêtes). Alors : $\text{connectivité(G)}=\text{connectivité(G-e)} \leq k-1$.
+      \item Sinon, il existe une coupe de sommets S de G-e telle que G-e-S est déconnecté.
+        Si G-S est déjà déconnecté, alors $\text{connectivité(G)} \leq |S| \leq k - 1 \leq k$.
+
+        Si G-S est connecté, alors e est une coupe d'arête puisque G-S-e est déconnecté.
+
+        Si il y a au moins 3 noeuds x,u,v dans G-S: alors en retirant u ou v, on déconnecte x de v ou de u.
+        Donc,
+        $S \cup \{u \text{ou} v\}$ est une coupe de G et $\text{connectivité}(G) \leq |S| + 1  \leq k$
+    \end{itemize}
  \end{proof}
 \end{mytheo}
 
 \begin{mytheo} [Théorème de Whitney]
   Un graphe à au moins trois noeuds est 2-connexe ssi toute paire de noeuds distincts est reliée par au moins deux chemins dont les noeuds internes sont distincts.
   \begin{proof}
-     Preuve \addTODO
+   \fbox{$\Longleftarrow$}
+   \newline
+   Si je retire un noeud quelconque du graphe, $\forall u,v$ au plus 1 des 2 chemin est toujours connecté $\rightarrow$ G reste connexe. \\
+   \fbox{$\Longrightarrow$}
+     \newline
+     Par récurrence sur $d(u,v)$ : 
+     \begin{enumerate}
+     \item Cas de base : $d(u,v)=1$. Si G est 2-connexe alors G est 2-arête-connexe (cfr théorème précédent) donc retirer une arête laisse le graphe connexe. Soit l'arête e telle qu'il existe le chemin uev. Si on retire e, u et v sont toujours connecté donc existe donc un chemin P tel que uPv. $\rightarrow$ 2 chemins entre u et v.
+     \item Si c'est vrai pour toute paire de noeuds $x,y$ tels que $d(x,y) < d(u,v)$, prouvons que c'est également vrai pour $d(u,v)$. Soit $w$, le dernier noeud sur le chemin le plus court de u à v. Par hypothèse, $d(u,w) < d(u,v)$ et par récurrence, u et w sont reliés par au moins 2 chemins dont les noeuds internes sont distincts, nommons les $P_1$ et $P_2$. Si je retire w, il existe, par connexité, un chemin P de u à v qui ne passe pas par w. Soit x le dernier noeud de P qui appartient à $P_1$ ou à $P_2$ (éventuellement, x=u). Il existe donc 2 chemins de u à v : u \dots x\dots v, et u \dots w \dots v. Par construction, ces chemins sont disjoints. 
+     \end{enumerate}
   \end{proof}
 \end{mytheo}
 
@@ -327,7 +355,7 @@ Ce théorème se généralise :
 \begin{mytheo} [Nombre d'arêtes dans un graphe k-connexe]
   Tout graphe k-connexe à $n$ noeuds possède $kn/2$ arêtes au moins (condition nécessaire).
   \begin{proof}
-     Preuve \addTODO
+     k-connexe $\rightarrow$ degré min $\geq$ k $\rightarrow$ $\sum \text{degrés} \geq kn \ \rightarrow \ |E| \geq kn/2$.
   \end{proof}
 \end{mytheo}
 

@@ -3,11 +3,12 @@
 
 \index{graphe}
 \begin{mydef}
+  \label{def:graph}
   Un \emph{graphe} est un triplet ($V$, $E$, $\varphi$), où :
   \begin{itemize}
     \item $V$ est un ensemble dont les éléments sont appelés sommets ou noeuds;
     \item $E$ est un ensemble dont les éléments sont appelés arêtes;
-    \item $\varphi$ est une fonction, dîte fonction d'incidence, qui associe à chaque arête un sommet ou une paire de sommets.
+    \item $\varphi$ est une fonction, dîte fonction d'incidence, qui associe à chaque arête un sommet ou une \emph{paire} de sommets.
   \end{itemize}
 \end{mydef}
 
@@ -28,12 +29,14 @@
 
 \index{graphe!sous-graphe}
 \begin{mydef}
+
   Un \emph{sous-graphe du graphe} ($V$, $E$, $\varphi$) est un graphe ($V'$, $E'$, $\varphi'$) avec :
   \begin{itemize}
     \item $V' \subseteq V$ ;
     \item $E' \subseteq E$ ;
-    \item $\varphi'$ est la restriction de $\varphi'$ à $E'$.
+    \item $\varphi'$ est la restriction de $\varphi$ à $E'$.
   \end{itemize}
+
 \end{mydef}
 
 \index{isomorphisme}
@@ -115,10 +118,10 @@
     \newline
     \newline
     \noindent
-    Notons aussi que plusieurs résultats sont possibles : \\
-    \begin{figure}[h!]
+    Notons aussi que plusieurs résultats sont possibles :
+    \begin{figure}[!h]
       \centering
-      \subfigure[h!]
+      \subfigure[]
       {
         \begin{tikzpicture}[scale = 0.75]
           \node[draw, circle] at ( 0, 1.5)  (1) {1};
@@ -135,7 +138,7 @@
         \end{tikzpicture}
       }
       % Cette ligne de commentaire semble être nécessaire pour que les figures soient affichées sur une ligne
-      \subfigure[h!]
+      \subfigure[]
       {
         \begin{tikzpicture}[scale = 0.75]
           \node[draw, circle] at ( 0, 1.5)  (1) {$1'$};
@@ -145,13 +148,13 @@
           \node[draw, circle] at (-2, 0.5)  (5) {$5'$};
 
           \draw[-] (1) edge [bend left] node[pos=0.05, anchor = west] {$a'$} (3);
-          \draw[-] (2) edge node[anchor = north] {$b'$} (5);
+          \draw[-] (2) edge node[anchor = north] {$d'$} (5);
           \draw[-] (2) edge node[pos=0.5, anchor = west] {$c'$} (4);
-          \draw[-] (3) edge node[pos=0.5, anchor = east] {$d'$} (5);
+          \draw[-] (3) edge node[pos=0.5, anchor = east] {$b'$} (5);
           \draw[-] (1) edge [bend right] node[pos=0.05, anchor = east] {$e'$} (4);
         \end{tikzpicture}
       }
-      \subfigure[h!]
+      \subfigure[]
       {
         \begin{tikzpicture}[scale = 0.75]
           \node[draw, circle] at ( 0, 1.5)  (1) {$1'$};
@@ -178,7 +181,7 @@
     \end{tabular}
     \newline
     \newline
-    Les six graphes de cet exemple sont isomorphes entre eux.\\
+    Les six graphes de cet exemple sont isomorphes entre eux.
 \end{myexem}
 
 \subsection{Parcours eulérien}
@@ -218,7 +221,7 @@
     Chaque arête incidente à un noeud $x$ est utilisé par le parcours eulérien:
     \begin{itemize}
       \item soit pour entrer dans $x$;
-      \item soit pour en sortir.\\
+      \item soit pour en sortir.
     \end{itemize}
     A chaque arête entrante correspond une arête sortante (celle qui suit dans le parcours sauf pour la dernière et la première).\\
     Donc, il y a une bijection entre les arêtes entrantes et les arêtes sortantes.\\
@@ -227,11 +230,11 @@
     \noindent
     \fbox{$\Longleftarrow$}
     \newline
-    On va construire un parcours eulérien :\\
+    On va construire un parcours eulérien :
     \begin{enumerate}
       \item On part d'un noeud arbitraire $x_0$.
       \item On prend une arête incidente à $x_0$, on arrive à un nouveau noeud.
-      \item Par parité, il y a au moins une arête non utilisée, on la prend, etc... Quand il n'y a plus d'arête disponible, on est forcément arrivé à $x_0$.\\
+      \item Par parité, il y a au moins une arête non utilisée, on la prend, etc... Quand il n'y a plus d'arête disponible, on est forcément arrivé à $x_0$.
     \end{enumerate}
     \begin{center}
       \begin{tikzpicture}[scale = 0.75]
@@ -263,7 +266,7 @@
     Pour tout autre noeud y, en arrivant à y, on a utilisé un nombre impair d'arêtes incidentes à y. On a un parcours fermé :
     \begin{itemize}
       \item Si toutes les arêtes incidentes aux x noeuds traversés par ce parcours sont utilisées, alors ce parcours est eulérien;
-      \item Sinon, il y a $x_1 \in$ parcours avec au moins une arête non exploitée.\\
+      \item Sinon, il y a $x_1 \in$ parcours avec au moins une arête non exploitée.
     \end{itemize}
     \begin{center}
       \begin{tikzpicture}[scale = 0.75]
